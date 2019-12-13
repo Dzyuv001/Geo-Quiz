@@ -1,0 +1,34 @@
+.btn {
+  border-radius: 0.5rem;
+}
+.btnGeo {
+  display: inline-block;
+  width: 15rem;
+  padding: 15px 25px;
+  font-size: 2rem;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  border: none;
+  box-shadow: 0 9px $indigo;
+  transition: all 0.2s ease-in-out;
+  transform: translateY(0.4rem);
+
+  &--correct:disabled {
+    background:$green;
+  }
+
+  &--incorrect:disabled{
+    background:$red;
+  }
+
+  &:hover {
+    box-shadow: 0 5px $indigo;
+  }
+
+  &:active {
+    box-shadow: 0 5px $indigo;
+    transform: translateY(0.4rem);
+  }
+}
