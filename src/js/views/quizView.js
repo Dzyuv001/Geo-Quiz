@@ -1,5 +1,13 @@
 import * as base from "./base";
 
+export const showContainer = () => {
+  base.flipUpContainer(base.elements.containerQuiz);
+};
+
+export const hideContainer = () => {
+  base.flipOutContainer(base.elements.containerQuiz);
+};
+
 export const resetScoreboard = totalValue => {
   base.elements.quizTotal.innerHTML = totalValue;
   updateScoreboard(0);
@@ -10,7 +18,6 @@ export const updateScoreboard = currentScore => {
 };
 
 export const showCorrect = correctIndex => {
-    console.log("the value of current index is ", correctIndex);
   base.elements.quizOptionBtn.forEach((btn, i) => {
     btn.classList.add(
       correctIndex == i ? "btnGeo--correct" : "btnGeo--incorrect"
@@ -34,7 +41,7 @@ export const renderQuestion = questionData => {
   } else {
     htmlMarkup = `
 <h2 class="heading-2 quiz__text">What countries flag is this?</h2>
-<img src="./assets/${questionData.question.ISOCode}.svg" alt="The flag no cheating, sorry blind people">`;
+<img class="quiz__flag-image" src="./assets/${questionData.question.ISOCode}.svg" alt="Flag of a country">`;
   }
   return htmlMarkup;
 };

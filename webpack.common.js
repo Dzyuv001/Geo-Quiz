@@ -1,4 +1,3 @@
-// const path = require("path");
 module.exports = {
   entry: { main: "./src/js/index.js", vendor: "./src/js/vendor.js" },
   module: {
@@ -12,7 +11,7 @@ module.exports = {
         use: {
           loader: "file-loader",
           options: {
-            name: "[name]_[hash].[ext]",
+            name: "[name].[ext]",
             outputPath: "assets"
           }
         }

@@ -9,6 +9,8 @@ const controlSetupQuiz = questionType => {
   state.quiz.genQuestions(questionType);
   quizView.resetScoreboard(state.quiz.getQuestionNumber());
   quizView.renderQuizQuestion(state.quiz.getCurrentQuestion());
+  setupQuizView.hideContainer();
+  quizView.showContainer();
 };
 
 const controlQuiz = option => {
@@ -20,10 +22,10 @@ const controlQuiz = option => {
     const val =state.quiz.getCorrectIndex();
     quizView.showCorrect(val);
     setTimeout(() => {
-      //update question
-      quizView.renderQuizQuestion(state.quiz.getCurrentQuestion());
       //stop displaying correct and incorrect
       quizView.toggleOptionBtns(false);
+      //update question
+      quizView.renderQuizQuestion(state.quiz.getCurrentQuestion());
 
     }, 750);
   } else {
