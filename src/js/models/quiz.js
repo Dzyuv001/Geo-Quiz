@@ -1,7 +1,7 @@
 var seedrandom = require("seedrandom");
 import countryData from "../JSON/CountryData.json";
 import continentIds from "../JSON/ContinentId.json";
-import countryISOCodes from "../JSON/CountryCode.json";
+// import countryISOCodes from "../JSON/CountryCode.json";
 export default class Quiz {
   constructor(queryString) {
     // check if query string is null
@@ -57,6 +57,7 @@ export default class Quiz {
     this.questionType = questionType;
     this.genQuestionNAnswers();
     this.genOptions();
+    console.log(this.questions);
   }
 
   genQuestionNAnswers() {
@@ -72,7 +73,7 @@ export default class Quiz {
       //add the capital and the answer to the question
       this.questions.push({
         capital: countryData[randNum].capital,
-        ISOCode: countryISOCodes[randNum].code,
+        ISOCode: countryData[randNum].code,
         answer: randNum
       });
       usedIds.push(randNum);
@@ -119,8 +120,11 @@ export default class Quiz {
   }
 
   isCorrect(userAnswer) {
-    const correctAnswer = this.questions[this.questionNumber].answer;
-    const correct = correctAnswer === userAnswer;
+    const currentQuestion = this.questions[this.questionNumber];
+    const correctAnswer = currentQuestion.answer;
+    const userOption = currentQuestion.options[userAnswer];
+    const correct = correctAnswer === userOption;
+    console.log(this.questions[this.questionNumber].answer, this.questionNumber,userAnswer,correctAnswer);
     // this.feedback.push({
     //   correct,
     //   correctAnswer,

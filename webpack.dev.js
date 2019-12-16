@@ -7,7 +7,11 @@ module.exports = merge(common, {
   mode: "development",
   output: {
     filename: "[name].bundle.js", //the files that is created
-    path: path.resolve(__dirname, "./dist/") // where is it created __dirname allows for a relative creation of files
+    path: path.resolve(__dirname, "./dist/"), // where is it created __dirname allows for a relative creation of files
+  publicPath:"/"
+  },
+  devServer: {
+    contentBase: "./dist"
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -28,3 +32,4 @@ module.exports = merge(common, {
     ]
   }
 });
+

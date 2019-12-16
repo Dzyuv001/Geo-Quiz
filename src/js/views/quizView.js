@@ -48,7 +48,7 @@ export const renderQuestion = questionData => {
 export const renderOptions = options => {
   base.elements.quizOptionBtn.forEach((btn, i) => {
     btn.innerHTML = options[i].name;
-    btn.classList.remove("btnGeo--correct");    
+    btn.classList.remove("btnGeo--correct");
     btn.classList.remove("btnGeo--incorrect");
   });
 };
