@@ -24,11 +24,14 @@ export default class Quiz {
   }
 
   getCorrectIndex() {
-    const question = this.questions[this.questionNumber];
+    const question = this.questions[this.questionNumber - 1];
     let id;
-   question.options.forEach((option,i) => {
-      if (option.id == question.answer) id= i ;
-    });
+    for (let i = 0; i < question.options.length; i++) {
+      if (question.options[i].id == question.answer) {
+        id = i;
+        break;
+      }
+    }
     return id;
   }
 
@@ -120,11 +123,11 @@ export default class Quiz {
   }
 
   isCorrect(userAnswer) {
+    console.log(userAnswer - 1);
     const currentQuestion = this.questions[this.questionNumber];
     const correctAnswer = currentQuestion.answer;
-    const userOption = currentQuestion.options[userAnswer];
-    const correct = correctAnswer === userOption;
-    console.log(this.questions[this.questionNumber].answer, this.questionNumber,userAnswer,correctAnswer);
+    const userOption = currentQuestion.options[userAnswer - 1].id;
+    const correct = correctAnswer == userOption;
     // this.feedback.push({
     //   correct,
     //   correctAnswer,
@@ -132,8 +135,15 @@ export default class Quiz {
     // });
     //increment the question number
     this.questionNumber += 1;
+    console.log(
+      correctAnswer,
+      userOption,
+      this.questionNumber,
+      userAnswer,
+      correct
+    );
     if (correct) {
-      this.correctCount+=1
+      this.correctCount += 1;
     }
     return this.correctCount;
   }
