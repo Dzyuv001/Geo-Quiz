@@ -8,7 +8,7 @@ module.exports = merge(common, {
   output: {
     filename: "[name].bundle.js", //the files that is created
     path: path.resolve(__dirname, "./dist/"), // where is it created __dirname allows for a relative creation of files
-  publicPath:"/"
+    publicPath: "/"
   },
   devServer: {
     contentBase: "./dist"
@@ -25,11 +25,10 @@ module.exports = merge(common, {
         //the loader ar executed back to front (lifo)
         use: [
           "style-loader", //inject styles into dom
-          "css-loader", //  css to into commonjs
+          "css-loader?url=false", //  css to into commonjs
           "sass-loader" //scss to css
         ]
       }
     ]
   }
 });
-

@@ -1,34 +1,49 @@
 .btn {
-  border-radius: 0.5rem;
-}
-.btnGeo {
   display: inline-block;
-  width: 15rem;
-  padding: 15px 25px;
+  width: 25rem;
+  padding: 1.5rem 2.5rem;
   font-size: 2rem;
   cursor: pointer;
   text-align: center;
   text-decoration: none;
   outline: none;
   border: none;
+  border-radius: 1rem;
   box-shadow: 0 9px $indigo;
   transition: all 0.2s ease-in-out;
-  transform: translateY(0.4rem);
+  transform: translateY(-0.4rem);
 
-  &--correct:disabled {
-    background:$green;
-  }
-
-  &--incorrect:disabled{
-    background:$red;
-  }
-
-  &:hover {
-    box-shadow: 0 5px $indigo;
-  }
+&--circle {
+  color: white;
+  background-color:dodgerblue;
+  width: 3rem;
+  height: 3rem;
+  padding: 0;
+  box-shadow: none;
+  border-radius: 50%;
+}
 
   &:active {
     box-shadow: 0 5px $indigo;
-    transform: translateY(0.4rem);
+    transform: translateY(-0.4rem);
   }
+  &:hover {
+    box-shadow: 0 5px $indigo;
+    transform: translateY(-0.2rem);
+  
+  }
+}
+.btnGeo {
+  width: 45%;
+  margin: 1%;
+  transform: translateY(-0.4rem);
+
+  &--correct:disabled {
+    background: $green;
+  }
+
+  &--incorrect:disabled {
+    background: $red;
+  }
+
 }

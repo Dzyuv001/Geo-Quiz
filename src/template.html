@@ -45,67 +45,86 @@
     <!-- non-Retina iPhone, iPod Touch, and Android 2.1+ devices: -->
     <link rel="apple-touch-icon-precomposed"
         href="https://developer.cdn.mozilla.net/static/img/favicon57.a2490b9a2d76.png">
-
-    <!-- if needed css link -->
-    <!-- <link rel="stylesheet" href="my-css-file.css"> -->
-
-    <!-- if needed js script link -->
-    <!-- <script src="main.js"></script> -->
 </head>
 
 <body>
     <div class="container container--visible main">
-        <h1 class="heading-1 text-center">GeoLords</h1>
-
-        <div class="container__sub">
-            <button type="button" id="btnStartFlagQuiz" class="btn btn-primary">Start Flag Quiz</button>
-            <button type="button" id="btnStartCapitalQuiz" class="btn btn-primary">Start Capital Quiz</button>
-        </div>
-        <div class="container__sub">
-            <h2>Select Continent</h2>
-            <form action="">
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="chk" value="option1">
-                    <label class="form-check-label" for="inlineCheckbox1">Africa</label>
+        <div class="container-lg">
+            <div class="container__sub globe">
+                <h1 class="heading-1 text-center globe__title">GEOLORDS</h1>
+                <div class="container-md globe__container">
+                    <div class="globe__image"></div>
                 </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                    <label class="form-check-label" for="inlineCheckbox1">Asia</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                    <label class="form-check-label" for="inlineCheckbox1">Australia</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                    <label class="form-check-label" for="inlineCheckbox1">Europe</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                    <label class="form-check-label" for="inlineCheckbox1">North America</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                    <label class="form-check-label" for="inlineCheckbox1">South America</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1">
-                    <label class="form-check-label" for="inlineCheckbox1">Oceania</label>
-                </div>
-
-                <div class="container__sub">
-                    <button type="button" id="btnStartCustomFlagQuiz" class="btn btn-primary">Start Flag Quiz</button>
-                    <button type="button" id="btnStartCustomCapitalQuiz" class="btn btn-primary">Start Capital
-                        Quiz</button>
-                </div>
+            </div>
+            <div class="container__sub container__sub--thin">
+                <form class="quiz-options" action="">
+                    <div class="form-group quiz-options__container">
+                        <h2 class="heading-2">Number of Questions</h2>
+                        <select class="form-control quiz-options__select" id="slctNumOfQuestions">
+                            <option value="10">10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="75">75</option>
+                            <option value="100">100</option>
+                        </select>
+                    </div>
+                    <div class="quiz-options__container">
+                        <h2 class="heading-2">Select Continent</h2>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input quiz-options__chkBox" type="checkbox" id="chkboxContinent1"
+                                value="option1">
+                            <label class="form-check-label" for="inlineCheckbox1">Africa</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input quiz-options__chkBox" type="checkbox" id="chkboxContinent2"
+                                value="option1">
+                            <label class="form-check-label" for="inlineCheckbox2">Asia</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input quiz-options__chkBox" type="checkbox" id="chkboxContinent3"
+                                value="option1">
+                            <label class="form-check-label" for="inlineCheckbox3">Europe</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input quiz-options__chkBox" type="checkbox" id="chkboxContinent4"
+                                value="option1">
+                            <label class="form-check-label" for="inlineCheckbox4">North America</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input quiz-options__chkBox" type="checkbox" id="chkboxContinent5"
+                                value="option1">
+                            <label class="form-check-label" for="inlineCheckbox5">South America</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input quiz-options__chkBox" type="checkbox" id="chkboxContinent6"
+                                value="option1">
+                            <label class="form-check-label" for="inlineCheckbox6">Oceania</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input quiz-options__chkBox" type="checkbox" id="chkboxContinent6"
+                                value="option1">
+                            <label class="form-check-label" for="inlineCheckbox7">Antarctica</label>
+                        </div>
+                    </div>
+            </div>
             </form>
-
+            <div class="container__sub">
+                <button type="button" id="btnStartFlagQuiz" class="btn btn-primary">Start Flag Quiz</button>
+                <button type="button" id="btnStartCapitalQuiz" class="btn btn-primary">Start Capital
+                    Quiz</button>
+            </div>
         </div>
     </div>
     <div class="container quiz">
-        <div class="quiz__counter">
-            <p> <span class="quiz__correct">0</span>/<span class="quiz_total">total</span></p>
-        </div>
+        <section class="quiz__ui">
+            <div class="container-md quiz__ui-container">
+                <button type="button" id="btnQuitQuiz" class="btn btn--circle">X</button>
+                <button type="button" id="btnRestart" class="btn btn--circle">↺</button>
+            </div>
+            <div class="quiz__counter">
+                <p> <span class="quiz__correct">0</span>/<span class="quiz_total">total</span></p>
+            </div>
+        </section>
         <div class="quiz__question">
             <h2 class="heading-2 quiz__text">Temp Text for the questions</h2>
             <!-- <img src="" alt=""> -->
@@ -117,7 +136,26 @@
             <button type="button" data-value="4" id="btnQuizOption4" class="btn btn-primary btnGeo">Option 4</button>
         </div>
     </div>
-
+    <div class="container feedback">
+        <h2 class="heading-2">Quiz Feedback for <span class="feedback__quiz-type"></span></h2>
+        <h3 class="heading-3 feedback__score"><span class="feedback__score"></span><span class="feedback__total"></span>
+        </h3>
+        <h3 class="heading-3 feedback__message">Welldone!!</h3>
+        <div class="feedback__container">
+            <table>
+                <thead>
+                    <tr>
+                        <th><span class="feedback__question-type"></span></th>
+                        <th>Correct Answer</th>
+                        <th>Your Answer</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </body>
 
 </html>

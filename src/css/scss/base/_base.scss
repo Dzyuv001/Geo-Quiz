@@ -18,9 +18,14 @@ html {
   }
   
   body {
+    position: relative;
+    height: 100vh;
+    width: 100vw;
     box-sizing: border-box;
     font-family: "Roboto", sans-serif;
-    background: dodgerblue;
+    background-image: linear-gradient(135deg, #74ecf5 0%, #498be7 60%,#4c1fb6 80%,#29063a 100%);
+    background-size: 400rem,400rem;
+    animation: shiftGradient 10s ease-in-out infinite;
   }
   
   *,
@@ -39,3 +44,4 @@ html {
     height: 100%;
     pointer-events: none;
   }
+

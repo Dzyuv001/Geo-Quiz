@@ -1,0 +1,36 @@
+.globe {
+  width: 33rem;
+  height: 33rem;
+  padding: 1.5rem;
+  border-radius: 50%;
+  margin-top: -20rem;
+  background: white;
+  &__title {
+    position: absolute;
+    top: -20%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    letter-spacing: 1.2rem ;
+    z-index: 2;
+    -webkit-text-stroke: .2rem #eee;
+  }
+
+  &__container {
+    height: 30rem;
+    width: 30rem;
+    border-radius: 50%;
+    background: white;
+    overflow: hidden;
+  }
+  &__image {
+    background-color: #27aae1;
+    margin: auto;
+    height: 30rem;
+    width: 31.5rem;
+    margin-left: -1.5rem;
+    background-image: url(/assets/worldMap.svg);
+    background-size: 60rem, 60rem;
+    background-position: 0%, 50%;
+    animation: moveBackground 10s linear infinite;
+  }
+}

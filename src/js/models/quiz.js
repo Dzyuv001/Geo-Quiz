@@ -1,30 +1,37 @@
-var seedrandom = require("seedrandom");
+var seedRandom = require("seedrandom");
 import countryData from "../JSON/CountryData.json";
 import continentIds from "../JSON/ContinentId.json";
-// import countryISOCodes from "../JSON/CountryCode.json";
+
 export default class Quiz {
-  constructor(queryString) {
-    // check if query string is null
-    if (queryString) {
+  constructor(quizData) {
+    // check if there is random seed
+    if (quizData.seed) {
       this.seed = queryString.seed;
-      this.questionAmount = queryString.questionNum;
-      this.getIdsList();
     } else {
       this.seed = (Math.random() + "").split(".")[1];
     }
+    this.numQuestions = quizData.numQuestions;
+    this.seedRandom = seedRandom(this.seed);
+
     // this.TotalQuestions = totalQuestion;
     this.correctCount = 0;
-    this.questionNumber = 0;
-    this.seedRandom = seedrandom(this.seed);
-    this.questionAmount = 10;
-    this.idsList = this.getIdsList("");
+    this.questionIndex = 0; //current question number
+    this.idsList = this.getIdsList(quizData.continentsMask);
     this.idsAmount = this.idsList.length - 1;
     this.questions = [];
     this.questionType;
   }
 
+  getQuestionIndex() {
+    return this.questionIndex;
+  }
+
+  getCorrectCount() {
+    return this.correctCount;
+  }
+
   getCorrectIndex() {
-    const question = this.questions[this.questionNumber - 1];
+    const question = this.getCurrentQuestion();
     let id;
     for (let i = 0; i < question.options.length; i++) {
       if (question.options[i].id == question.answer) {
@@ -35,18 +42,14 @@ export default class Quiz {
     return id;
   }
 
-  getQuestionNumber() {
-    return this.questionAmount;
+  getNumQuestions() {
+    return this.numQuestions;
   }
 
   getIdsList(continentMask) {
     let ids = [];
     continentIds.forEach((continentArray, i) => {
-      if (
-        continentMask == "" ||
-        continentMask == "0000000" ||
-        continentMask[i]
-      ) {
+      if (continentMask == "0000000" || continentMask[i] == "1") {
         ids.push(...continentArray);
       }
     });
@@ -54,9 +57,6 @@ export default class Quiz {
   }
 
   genQuestions(questionType) {
-    this.questionAmount = 10;
-    this.idsList = this.getIdsList("");
-    this.idsAmount = this.idsList.length - 1;
     this.questionType = questionType;
     this.genQuestionNAnswers();
     this.genOptions();
@@ -66,35 +66,35 @@ export default class Quiz {
   genQuestionNAnswers() {
     //if true flag question if false capital question
     let usedIds = [];
-    for (let i = 0; i < this.questionAmount; i++) {
-      let randNum = this.genRandNum(this.idsAmount);
+    for (let i = 0; i < this.numQuestions; i++) {
+      let randId = this.idsList[this.genRandNum(this.idsAmount)];
       //if the id has been seen loop again until unique id is made
-      if (usedIds.includes(randNum)) {
+      if (usedIds.includes(randId)) {
         i--;
         continue;
       }
       //add the capital and the answer to the question
       this.questions.push({
-        capital: countryData[randNum].capital,
-        ISOCode: countryData[randNum].code,
-        answer: randNum
+        capital: countryData[randId].capital,
+        ISOCode: countryData[randId].code,
+        answer: randId
       });
-      usedIds.push(randNum);
+      usedIds.push(randId);
     }
   }
 
   genOptions() {
     //used to generated random alternative options
-    for (let i = 0; i < this.questionAmount; i++) {
+    for (let i = 0; i < this.numQuestions; i++) {
       let usedIds = [];
       usedIds.push(this.questions[i].answer);
       for (let j = 1; j < 4; j++) {
-        let randNum = this.genRandNum(this.idsAmount);
-        if (usedIds.includes(randNum)) {
+        let randId = this.idsList[this.genRandNum(this.idsAmount)];
+        if (usedIds.includes(randId)) {
           j--;
           continue;
         }
-        usedIds.push(randNum);
+        usedIds.push(randId);
       }
       this.questions[i].options = [];
       this.randArray(usedIds).forEach(id => {
@@ -103,11 +103,32 @@ export default class Quiz {
     }
   }
 
-  getCurrentQuestion() {
+  getNameOfOption(val) {
+    return this.getCurrentQuestion().options[val].name;
+  }
+
+  getQuestionData(questionType) {
+    const question = this.getCurrentQuestion();
     return {
-      question: this.questions[this.questionNumber],
+      correctAns: question.answer,
+      data: questionType ? question.capital : question.ISOCode
+    };
+  }
+
+  getCurrentQuestion() {
+    return this.questions[this.questionIndex];
+  }
+
+  getCurrentQuestionRenderData() {
+    return {
+      question: this.getCurrentQuestion(),
       questionType: this.questionType
     };
+  }
+
+  getQuestionData() {
+    const question = this.getCurrentQuestion();
+    return this.questionType ? question.capital : question.ISOCode;
   }
 
   //used to scrabble the array so that the answer doesn't show up in the same position
@@ -123,22 +144,16 @@ export default class Quiz {
   }
 
   isCorrect(userAnswer) {
-    console.log(userAnswer - 1);
-    const currentQuestion = this.questions[this.questionNumber];
+    const currentQuestion = this.getCurrentQuestion();
     const correctAnswer = currentQuestion.answer;
     const userOption = currentQuestion.options[userAnswer - 1].id;
     const correct = correctAnswer == userOption;
-    // this.feedback.push({
-    //   correct,
-    //   correctAnswer,
-    //   userAnswer
-    // });
     //increment the question number
-    this.questionNumber += 1;
+    console.log("the question index is", this.questionIndex);
     console.log(
       correctAnswer,
       userOption,
-      this.questionNumber,
+      this.questionIndex,
       userAnswer,
       correct
     );
@@ -148,9 +163,23 @@ export default class Quiz {
     return this.correctCount;
   }
 
-  isGameOver() {
-    return this.questionAmount == this.questionNumber;
+  incrementQuestionCount() {
+    this.questionIndex += 1;
   }
+
+  getSeed() {
+    return this.seed;
+  }
+
+  isGameOver() {
+    console.log(
+      this.numQuestions == this.questionIndex,
+      this.numQuestions,
+      this.questionIndex
+    );
+    return this.numQuestions == this.questionIndex;
+  }
+
   genRandNum(max) {
     //generate random seeded number from from set parameter of max
     return Math.floor(this.seedRandom() * max);

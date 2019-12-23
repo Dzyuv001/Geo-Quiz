@@ -1,6 +1,7 @@
 export const elements = {
   containerMain: document.querySelector(".container.main"),
   containerQuiz: document.querySelector(".container.quiz"),
+  containerFeedback: document.querySelector(".container.feedback"),
   startFlagQuiz: document.getElementById("btnStartFlagQuiz"),
   startCapitalQuiz: document.getElementById("btnStartCapitalQuiz"),
   startCustomFlagQuiz: document.getElementById("btnStartCustomFlagQuiz"),
@@ -9,6 +10,8 @@ export const elements = {
   quizCorrect: document.querySelector(".quiz__correct"),
   quizQuestionContainer: document.querySelector(".quiz__question"),
   quizOptions: document.querySelector("quiz__options"),
+  quizOptionsSelect : document.querySelector(".quiz-options__select"),
+  quizOptionsChkArray : document.querySelectorAll(".quiz-options__chkBox"),
   quizOptionBtn: document.querySelectorAll(".btnGeo")
 };
 
