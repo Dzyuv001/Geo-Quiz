@@ -60,7 +60,6 @@ export default class Quiz {
     this.questionType = questionType;
     this.genQuestionNAnswers();
     this.genOptions();
-    console.log(this.questions);
   }
 
   genQuestionNAnswers() {
@@ -172,11 +171,6 @@ export default class Quiz {
   }
 
   isGameOver() {
-    console.log(
-      this.numQuestions == this.questionIndex,
-      this.numQuestions,
-      this.questionIndex
-    );
     return this.numQuestions == this.questionIndex;
   }
 

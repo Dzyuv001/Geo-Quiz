@@ -55,55 +55,39 @@ const controlQuiz = option => {
     const correctIndex = state.quiz.getCorrectIndex();
     //show correct and incorrect answers
 
+    //gather data for feedback obj
     const correctAns = state.quiz.getNameOfOption(correctIndex);
     const userAns = state.quiz.getNameOfOption(option);
     const data = state.quiz.getQuestionData();
+
+    //set the current question data to the feedback obj
     state.feedback.addQuestionFeedback(correctAns, userAns, data);
 
-    console.log(
-      option,
-      "correct answer:" + correctAns,
-      "user answer:" + userAns,
-      data
-    );
+    //display correct and incorrect answer to the questions
     quizView.showCorrect(correctIndex);
+
+    //increment the question
     state.quiz.incrementQuestionCount();
+
+    // check if the game is over
     if (!state.quiz.isGameOver()) {
+      //time out to allows the user to see incorrect and correct answers
       setTimeout(() => {
         //stop displaying correct and incorrect
         quizView.toggleOptionBtns(false);
-        //update question
+        //render next question
         quizView.renderQuizQuestion(state.quiz.getCurrentQuestionRenderData());
       }, 750);
     } else {
+      //hide quiz page
       quizView.hideContainer();
+      //show the feedback page
       feedbackView.showContainer();
+      //set correct amount
       state.feedback.setCorrectAnswers(state.quiz.getCorrectCount());
-      console.log(state.feedback.feedback);
+      //render feedback data
       feedbackView.renderFeedback(state.feedback.feedback);
     }
-
-    //   if (!state.quiz.isGameOver()) {
-    //     console.log("the state is", state.quiz.getQuestionIndex());
-    //     const currentQuestionData = state.quiz.getCurrentQuestionRenderData();
-    //     const correctAns = currentQuestionData.question.answer;
-    //     const userAns = state.quiz.getUserAnswerValue(val);
-    //     const data = currentQuestionData.questionType
-    //       ? currentQuestionData.question.capital
-    //       : currentQuestionData.question.ISOCode;
-    //     //update feedback class
-    //     state.feedback.addQuestionFeedback(correctAns, userAns, data);
-
-    //     //time out to display
-    //     setTimeout(() => {
-    //       //stop displaying correct and incorrect
-    //       quizView.toggleOptionBtns(false);
-    //     }, 750);
-    //   } else {
-    //
-    // quizView.hideContainer();
-    // feedbackView.showContainer();
-    //   }
   }
 };
 
