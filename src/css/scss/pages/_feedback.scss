@@ -1,0 +1,18 @@
+.feedback {
+  text-align: center;
+  &__score {
+    display: inline-block;
+    width: 12rem;
+    height: 12rem;
+    line-height: 12rem;
+    border-radius: 50%;
+    background: goldenrod;
+  }
+
+  &__message {
+  }
+
+  &__container {
+    height: 50rem;
+  }
+}

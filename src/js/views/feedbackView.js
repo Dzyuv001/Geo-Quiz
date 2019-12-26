@@ -13,8 +13,8 @@ const renderShareDisplayContainer = (
   numCorrect,
   numQuestions
 ) => {
-  const stringQuizType = questionType ? "Capital" : "Flag";
-  base.elements.feedbackQuizType.innerHTML = stringQuizType;
+  const stringQuestionType = questionType ? "Capital" : "Flag";
+  base.elements.feedbackQuizType.innerHTML = stringQuestionType;
   base.elements.feedbackScore.innerHTML = `${numCorrect} of ${numQuestions}`;
   const percentCorrect = Math.round((numCorrect / numQuestions) * 100);
   if (percentCorrect < 20) {
@@ -31,24 +31,29 @@ const renderShareDisplayContainer = (
 };
 const renderFeedbackTable = (questionType, questions) => {
   const stringQuestionType = questionType ? "Capital" : "Flag";
-  base.elements.feedbackQuestionType.innerHTML = stringQuizType;
+  base.elements.feedbackQuestionType.innerHTML = stringQuestionType;
   let htmlMarkup = "";
-  question.forEach(question => {
+  questions.forEach(question => {
     htmlMarkup += renderRow(question, questionType);
   });
-  feedbackTableRows.innerHTML = htmlMarkup;
+  base.elements.feedbackTableRows.innerHTML = htmlMarkup;
 };
 
 const renderRow = (question, questionType) => {
   let dataColumn = questionType
     ? question.data
-    : `<img class="quiz__flag-image" src="./assets/${question.data}.svg" alt="Flag of a country">`;
+    : `<img class="feedback__image" src="./assets/${question.data}.svg" alt="Flag of a country">`;
+  const correct = `<td>${
+    question.questionAnswer == question.userAnswer ? "✔" : "X"
+  }</td>`;
   let markup = `
-<td>
- ${dataColumn}
-</td>
-<td>${question.questionAnswer}</td>
-<td>${question.userAnswer}</td>
+<tr class="table__row">
+  ${correct}
+  <td>${dataColumn}</td>
+  <td>${question.questionAnswer}</td>
+  <td>${question.userAnswer}</td>
+
+</tr>
 `;
   return markup;
 };
@@ -57,8 +62,8 @@ export const renderFeedback = feedback => {
   renderShareDisplayContainer(
     feedback.questionType,
     feedback.numCorrect,
-    numQuestions
+    feedback.numQuestions
   );
-  renderFeedbackTable();
+  renderFeedbackTable(feedback.questionType, feedback.questions);
   console.log(feedback);
 };

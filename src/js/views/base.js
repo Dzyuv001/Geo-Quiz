@@ -12,7 +12,12 @@ export const elements = {
   quizOptions: document.querySelector("quiz__options"),
   quizOptionsSelect : document.querySelector(".quiz-options__select"),
   quizOptionsChkArray : document.querySelectorAll(".quiz-options__chkBox"),
-  quizOptionBtn: document.querySelectorAll(".btnGeo")
+  quizOptionBtn: document.querySelectorAll(".btnGeo"),
+  feedbackQuizType: document.querySelector(".feedback__quiz-type"),
+  feedbackQuestionType: document.querySelector(".feedback__question-type"),
+  feedbackScore: document.querySelector(".feedback__score"),
+  feedbackMessage: document.querySelector(".feedback__message"),
+  feedbackTableRows: document.querySelector(".feedback__table-rows")
 };
 
 export const classStrings = {
