@@ -2,8 +2,8 @@ export default class Feedback {
   constructor(feedback) {
     this.feedback = {
       questionType: feedback.questionType,
-      numCorrect:"",
       numQuestions: feedback.numQuestions,
+      numCorrect:0,
       seed: feedback.seed,
       continentsMask: feedback.continentsMask,
       questions: []
@@ -11,7 +11,6 @@ export default class Feedback {
   }
 
   addQuestionFeedback(questionAnswer, userAnswer, data) {
-    console.log("the data",questionAnswer, userAnswer, data)
     this.feedback.questions.push({
       questionAnswer,
       userAnswer,
@@ -19,8 +18,8 @@ export default class Feedback {
     });
   }
 
-  setCorrectAnswers(numOfCorrectAns){
-      this.feedback.numOfCorrectAns = numOfCorrectAns;
+  setCorrectAnswers(numCorrect){
+      this.feedback.numCorrect = numCorrect;
   }
 
   getFeedBackData() {

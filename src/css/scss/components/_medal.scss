@@ -1,0 +1,33 @@
+.medal {
+  width: 12rem;
+  height: 12rem;
+  font-size: 2.5rem;
+  line-height: 12rem;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+ 
+  &__platinum {
+    background-color: #5f6d8b;
+
+    border: 2px solid darken($color: #5f6d8b, $amount: .2)
+  }
+  &__gold {
+    background-color: #daa520;
+    border: 2px solid darken($color: #daa520, $amount: .2)
+  }
+  &__silver {
+    background-color: #d3d3d3;
+    border: 2px solid darken($color: #d3d3d3, $amount: .2)
+  }
+
+  &__bronze {
+    background-color: #b16c27;
+    border: 2px solid darken($color: #b16c27, $amount: .2)
+  }
+
+  &__wood {
+    background-image: url("/assets/medal_textures/wood_texture_normal.jpg");
+    border: 2px solid #b16c27;
+  }
+}

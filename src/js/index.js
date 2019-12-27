@@ -56,6 +56,7 @@ const controlQuiz = option => {
     //show correct and incorrect answers
 
     //gather data for feedback obj
+    console.log("debug data",correctIndex,option );
     const correctAns = state.quiz.getNameOfOption(correctIndex);
     const userAns = state.quiz.getNameOfOption(option);
     const data = state.quiz.getQuestionData();
@@ -86,6 +87,7 @@ const controlQuiz = option => {
       //set correct amount
       state.feedback.setCorrectAnswers(state.quiz.getCorrectCount());
       //render feedback data
+      console.log("the feedback data ", state.feedback.feedback);
       feedbackView.renderFeedback(state.feedback.feedback);
     }
   }

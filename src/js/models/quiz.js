@@ -12,8 +12,6 @@ export default class Quiz {
     }
     this.numQuestions = quizData.numQuestions;
     this.seedRandom = seedRandom(this.seed);
-
-    // this.TotalQuestions = totalQuestion;
     this.correctCount = 0;
     this.questionIndex = 0; //current question number
     this.idsList = this.getIdsList(quizData.continentsMask);
@@ -27,6 +25,7 @@ export default class Quiz {
   }
 
   getCorrectCount() {
+    console.log("the number of correct answer",this.correctCount);
     return this.correctCount;
   }
 
@@ -145,7 +144,7 @@ export default class Quiz {
   isCorrect(userAnswer) {
     const currentQuestion = this.getCurrentQuestion();
     const correctAnswer = currentQuestion.answer;
-    const userOption = currentQuestion.options[userAnswer - 1].id;
+    const userOption = currentQuestion.options[userAnswer].id;
     const correct = correctAnswer == userOption;
     //increment the question number
     console.log("the question index is", this.questionIndex);

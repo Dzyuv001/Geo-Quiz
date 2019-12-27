@@ -15,7 +15,7 @@ export const elements = {
   quizOptionBtn: document.querySelectorAll(".btnGeo"),
   feedbackQuizType: document.querySelector(".feedback__quiz-type"),
   feedbackQuestionType: document.querySelector(".feedback__question-type"),
-  feedbackScore: document.querySelector(".feedback__score"),
+  feedbackMedal: document.querySelector(".feedback__medal"),
   feedbackMessage: document.querySelector(".feedback__message"),
   feedbackTableRows: document.querySelector(".feedback__table-rows")
 };

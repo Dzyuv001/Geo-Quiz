@@ -1,18 +1,45 @@
 .feedback {
   text-align: center;
-  &__score {
-    display: inline-block;
-    width: 12rem;
-    height: 12rem;
-    line-height: 12rem;
-    border-radius: 50%;
-    background: goldenrod;
-  }
+  &__table {
+    position: relative;
+    height: 30rem;
+    overflow-y: scroll;
+    overflow-x: hidden;
 
-  &__message {
+    &-heading {
+      position: fixed;
+      left: 50%;
+      transform: translate(-50%, 0);
+      width: 92.5%;
+      background: white;
+      z-index: 20;
+    }
+    &-body {
+      margin-top: 3rem;
+    }
+    &-correct {
+      width: 11.5%;
+    }
+    &-flag {
+      width: 17.5%;
+    }
+    &-correct-answer {
+      width: 35%;
+    }
+
+    &-your-answer {
+      width: 35%;
+    }
+  }
+  &__medal{
+    display: inline-block;
   }
 
   &__container {
     height: 50rem;
+  }
+  &__image {
+    height: 4rem;
+    border: 2px solid #ccc;
   }
 }

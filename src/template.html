@@ -130,28 +130,26 @@
             <!-- <img src="" alt=""> -->
         </div>
         <div class="quiz__options">
-            <button type="button" data-value="1" id="btnQuizOption1" class="btn btn-primary btnGeo">Option 1</button>
-            <button type="button" data-value="2" id="btnQuizOption2" class="btn btn-primary btnGeo">Option 2</button>
-            <button type="button" data-value="3" id="btnQuizOption3" class="btn btn-primary btnGeo">Option 3</button>
-            <button type="button" data-value="4" id="btnQuizOption4" class="btn btn-primary btnGeo">Option 4</button>
+            <button type="button" data-value="0" id="btnQuizOption1" class="btn btn-primary btnGeo">Option 1</button>
+            <button type="button" data-value="1" id="btnQuizOption2" class="btn btn-primary btnGeo">Option 2</button>
+            <button type="button" data-value="2" id="btnQuizOption3" class="btn btn-primary btnGeo">Option 3</button>
+            <button type="button" data-value="3" id="btnQuizOption4" class="btn btn-primary btnGeo">Option 4</button>
         </div>
     </div>
     <div class="container feedback">
-        <h2 class="heading-2">You finished the <span class="feedback__quiz-type"></span> quiz</h2>
-        <h3 class="heading-3 feedback__score"></h3>
-        <h3 class="heading-3 feedback__message">Welldone!!</h3>
-        <div class="feedback__container">
+        <div class="feedback__medal medal"></div>
+        <h2 class="heading-3 feedback__message"></h2>
+        <div class="feedback__table">
             <table class="table">
-                <thead>
+                <thead class="feedback__table-heading"> 
                     <tr>
-                        <th class="table__heading"><span class="feedback__question-type"></span></th>
-                        <th class="table__heading">Correct</th >   
-                        <th class="table__heading">Correct Answer</th>
-                        <th class="table__heading">Your Answer</th>
+                        <th class="table__heading feedback__table-correct">Correct</th>
+                        <th class="table__heading feedback__table-flag"><span class="feedback__question-type"></span></th>
+                        <th class="table__heading feedback__table-correct-answer">Correct Answer</th>
+                        <th class="table__heading feedback__table-your-answer">Your Answer</th>
                     </tr>
                 </thead>
-                <tbody class="feedback__table-rows">
-                  
+                <tbody class="feedback__table-rows feedback__table-body">
                 </tbody>
             </table>
         </div>
