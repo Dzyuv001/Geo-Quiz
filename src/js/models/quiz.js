@@ -124,6 +124,10 @@ export default class Quiz {
     };
   }
 
+  getQuestionType(){
+    return this.questionType;
+  }
+
   getQuestionData() {
     const question = this.getCurrentQuestion();
     return this.questionType ? question.capital : question.ISOCode;

@@ -101,7 +101,7 @@
                             <label class="form-check-label" for="inlineCheckbox6">Oceania</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input quiz-options__chkBox" type="checkbox" id="chkboxContinent6"
+                            <input class="form-check-input quiz-options__chkBox" type="checkbox" id="chkboxContinent7"
                                 value="option1">
                             <label class="form-check-label" for="inlineCheckbox7">Antarctica</label>
                         </div>
@@ -141,10 +141,11 @@
         <h2 class="heading-3 feedback__message"></h2>
         <div class="feedback__table">
             <table class="table">
-                <thead class="feedback__table-heading"> 
+                <thead class="feedback__table-heading">
                     <tr>
                         <th class="table__heading feedback__table-correct">Correct</th>
-                        <th class="table__heading feedback__table-flag"><span class="feedback__question-type"></span></th>
+                        <th class="table__heading feedback__table-flag"><span class="feedback__question-type"></span>
+                        </th>
                         <th class="table__heading feedback__table-correct-answer">Correct Answer</th>
                         <th class="table__heading feedback__table-your-answer">Your Answer</th>
                     </tr>
@@ -152,6 +153,18 @@
                 <tbody class="feedback__table-rows feedback__table-body">
                 </tbody>
             </table>
+
+        </div>
+        <div class="container__sub">
+            <button type="button" id="btnShare" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Click to copy URL">
+                Tooltip on top
+              </button>
+            <!-- <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Disabled tooltip">
+                <button id="btnShare" class="btn btn-primary" style="pointer-events: none;" type="button" disabled>Disabled button</button>
+              </span> -->
+            <!-- <button type="button" id="btnShare" class="btn btn-primary"><span class="btn--popup"></span> Share Quiz</button> -->
+            <button type="button" id="btnRetry" class="btn btn-primary">Retry</button>
+            <button type="button" id="btnCustomQuiz" class="btn btn-primary">Custom Quiz</button>
         </div>
     </div>
 </body>

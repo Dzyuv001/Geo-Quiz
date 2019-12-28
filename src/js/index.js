@@ -5,9 +5,12 @@ import * as feedbackView from "./views/feedbackView";
 import Quiz from "./models/quiz";
 import Feedback from "./models/feedback";
 
+import * as util from "./utility";
+
 const controlSetupQuiz = questionType => {
-  const queryString = "";
-  if (queryString) {
+  let queryString = "";
+  queryString = util.getQueryString();
+  if (queryString == "") {
     state.quiz = new Quiz({
       questionType,
       seed: queryString.seed,
@@ -35,6 +38,13 @@ const controlSetupQuiz = questionType => {
       numQuestions: userOptions.numQuestions,
       continentsMask: userOptions.continentsMask
     });
+    queryString = {
+      questionType,
+      continentsMask: userOptions.continentsMask,
+      seed
+    };
+    console.log("the data tha that is being passed is", queryString);
+    util.setQueryString(queryString);
   }
   state.quiz.genQuestions(questionType);
   quizView.resetScoreboard(state.quiz.getNumQuestions());
@@ -56,7 +66,7 @@ const controlQuiz = option => {
     //show correct and incorrect answers
 
     //gather data for feedback obj
-    console.log("debug data",correctIndex,option );
+    console.log("debug data", correctIndex, option);
     const correctAns = state.quiz.getNameOfOption(correctIndex);
     const userAns = state.quiz.getNameOfOption(option);
     const data = state.quiz.getQuestionData();
@@ -93,12 +103,6 @@ const controlQuiz = option => {
   }
 };
 
-const controlFeedback = quizOver => {
-  if (quizOver) {
-  } else {
-  }
-};
-
 //events
 document.getElementById("btnStartFlagQuiz").addEventListener("click", e => {
   controlSetupQuiz(false);
@@ -115,6 +119,45 @@ document.getElementById("btnQuitQuiz").addEventListener("click", e => {
 
 document.getElementById("btnRestart").addEventListener("click", e => {
   controlSetupQuiz();
+});
+
+document.getElementById("btnShare").addEventListener("click", e => {
+  let copyError = copyPageURL();
+  if (copyError){
+    e.target.setAttribute("title","Failed to copy URL");
+  }else {
+    e.target.setAttribute("title","URL Copied");
+  }
+});
+
+const copyPageURL = async () => {
+  let hasError = false;
+  //https://web.dev/image-support-for-async-clipboard/
+  try {
+    await navigator.clipboard.writeText(location.href);
+    console.log('Page URL copied to clipboard');
+    return false
+  } catch (err) {
+    console.error('Failed to copy: ', err);
+    return true;
+  }
+}
+
+document.getElementById("btnRetry").addEventListener("click", e => {
+  //hide feedback quiz view
+  const queryData = util.setQueryString();
+
+  feedbackView.hideContainer();
+
+  setupQuizView.showContainer();
+  controlSetupQuiz(queryData.questionType);
+});
+
+document.getElementById("btnCustomQuiz").addEventListener("click", e => {
+  //hide feedback quiz view
+  feedbackView.hideContainer();
+  //show setup quiz view
+  setupQuizView.showContainer();
 });
 
 document.querySelector(".quiz__options").addEventListener("click", e => {
