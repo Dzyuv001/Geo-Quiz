@@ -116,18 +116,20 @@
         </div>
     </div>
     <div class="container quiz">
-        <section class="quiz__ui">
-            <div class="container-md quiz__ui-container">
-                <button type="button" id="btnQuitQuiz" class="btn btn--circle">X</button>
-                <button type="button" id="btnRestart" class="btn btn--circle">↺</button>
+        <div class="quiz__container">
+            <section class="quiz__ui">
+                <div class="container-md quiz__ui-container">
+                    <button type="button" id="btnQuitQuiz" class="btn btn--circle">X</button>
+                    <button type="button" id="btnRestart" class="btn btn--circle">↺</button>
+                </div>
+                <div class="quiz__counter">
+                    <p> <span class="quiz__correct">0</span>/<span class="quiz_total">total</span></p>
+                </div>
+            </section>
+            <div class="quiz__question">
+                <h2 class="heading-2 quiz__text">Temp Text for the questions</h2>
+                <!-- <img src="" alt=""> -->
             </div>
-            <div class="quiz__counter">
-                <p> <span class="quiz__correct">0</span>/<span class="quiz_total">total</span></p>
-            </div>
-        </section>
-        <div class="quiz__question">
-            <h2 class="heading-2 quiz__text">Temp Text for the questions</h2>
-            <!-- <img src="" alt=""> -->
         </div>
         <div class="quiz__options">
             <button type="button" data-value="0" id="btnQuizOption1" class="btn btn-primary btnGeo">Option 1</button>
@@ -156,13 +158,10 @@
 
         </div>
         <div class="container__sub">
-            <button type="button" id="btnShare" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Click to copy URL">
+            <button type="button" id="btnShare" class="btn btn-primary" data-toggle="tooltip" data-placement="top"
+                title="Click to copy URL">
                 Tooltip on top
-              </button>
-            <!-- <span class="d-inline-block" tabindex="0" data-toggle="tooltip" title="Disabled tooltip">
-                <button id="btnShare" class="btn btn-primary" style="pointer-events: none;" type="button" disabled>Disabled button</button>
-              </span> -->
-            <!-- <button type="button" id="btnShare" class="btn btn-primary"><span class="btn--popup"></span> Share Quiz</button> -->
+            </button>
             <button type="button" id="btnRetry" class="btn btn-primary">Retry</button>
             <button type="button" id="btnCustomQuiz" class="btn btn-primary">Custom Quiz</button>
         </div>

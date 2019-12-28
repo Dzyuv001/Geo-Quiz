@@ -14,7 +14,7 @@
       background: white;
       z-index: 20;
     }
-    &-body {
+    &-body:before {
       margin-top: 3rem;
     }
     &-correct {

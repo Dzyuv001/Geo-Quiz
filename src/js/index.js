@@ -10,6 +10,7 @@ import * as util from "./utility";
 const controlSetupQuiz = questionType => {
   let queryString = "";
   queryString = util.getQueryString();
+  console.log("we are here ", queryString);
   if (queryString == "") {
     state.quiz = new Quiz({
       questionType,
@@ -145,11 +146,12 @@ const copyPageURL = async () => {
 
 document.getElementById("btnRetry").addEventListener("click", e => {
   //hide feedback quiz view
-  const queryData = util.setQueryString();
+  const queryData = util.getQueryString();
 
   feedbackView.hideContainer();
 
   setupQuizView.showContainer();
+  console.log("the data is being read from the thing ", queryData);
   controlSetupQuiz(queryData.questionType);
 });
 
