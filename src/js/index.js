@@ -9,14 +9,14 @@ import * as util from "./utility";
 
 const controlSetupQuiz = (questionType, queryStringData) => {
   if (queryStringData) {
-    console.log("queryStringData:",queryStringData)
+    console.log("queryStringData:", queryStringData);
     const quizData = {
       questionType,
       seed: queryStringData.seed,
       numQuestions: queryStringData.numQuestions,
       continentsMask: queryStringData.continentsMask
     };
-    console.log("the data is now")
+    console.log("the data is now");
     state.quiz = new Quiz(quizData);
     state.feedback = new Feedback(quizData);
   } else {
@@ -27,7 +27,7 @@ const controlSetupQuiz = (questionType, queryStringData) => {
       continentsMask: userOptions.continentsMask
     });
     seed = state.quiz.getSeed();
-    const quizData  = {
+    const quizData = {
       questionType,
       seed,
       numQuestions: userOptions.numQuestions,
@@ -138,9 +138,9 @@ document.getElementById("btnRetry").addEventListener("click", e => {
   const queryData = util.getQueryString();
 
   feedbackView.hideContainer();
-console.log("the query string data", queryData);
+  console.log("the query string data", queryData);
   quizView.showContainer();
-  controlSetupQuiz(queryData.questionType,queryData);
+  controlSetupQuiz(queryData.questionType, queryData);
 });
 
 document.getElementById("btnCustomQuiz").addEventListener("click", e => {
@@ -154,13 +154,21 @@ document.querySelector(".quiz__options").addEventListener("click", e => {
   if (e.target && e.target.className.includes("btnGeo")) {
     controlQuiz(e.target.getAttribute("data-value"));
   }
-  console.log("option selected");
 });
 
 const init = () => {
   let state = {};
   window.state = state;
   setupQuizView.showContainer();
+  state.util = util;
+  const queryStringData = util.getQueryString();
+  console.log(queryStringData);
+  if (Object.entries(queryStringData).length !== 0) {
+    console.log("is this really working ");
+    controlSetupQuiz(queryStringData.questionType, queryStringData);
+  } else {
+    console.log("no lolol");
+  }
 };
 
 init(); //<-- entry point in the application
