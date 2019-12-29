@@ -9,28 +9,24 @@
   outline: none;
   border: none;
   border-radius: 1rem;
-  box-shadow: 0 9px $indigo;
+  box-shadow: 0 9px $dodgerblue--dark;
   transition: all 0.2s ease-in-out;
   transform: translateY(-0.4rem);
 
-&--circle {
-  color: white;
-  background-color:dodgerblue;
-  width: 3rem;
-  height: 3rem;
-  padding: 0;
-  box-shadow: none;
-  border-radius: 50%;
-}
-
-  &:active {
-    box-shadow: 0 5px $indigo;
-    transform: translateY(-0.4rem);
+  &--circle {
+    color: white;
+    background-color: dodgerblue;
+    width: 3rem;
+    height: 3rem;
+    padding: 0;
+    box-shadow: none;
+    border-radius: 50%;
   }
-  &:hover {
-    box-shadow: 0 5px $indigo;
-    transform: translateY(-0.2rem);
-  
+
+  &:hover,
+  &:active {
+    box-shadow: 0 5px $dodgerblue--dark;
+    transform: translateY(-0.5rem);
   }
 }
 .btnGeo {
@@ -40,10 +36,11 @@
 
   &--correct:disabled {
     background: $green;
+    box-shadow: 0 0.9rem $green--dark;
   }
 
   &--incorrect:disabled {
     background: $red;
+    box-shadow: 0 0.9rem $red--dark;
   }
-
 }
