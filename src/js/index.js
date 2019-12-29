@@ -162,12 +162,10 @@ const init = () => {
   setupQuizView.showContainer();
   state.util = util;
   const queryStringData = util.getQueryString();
-  console.log(queryStringData);
   if (Object.entries(queryStringData).length !== 0) {
-    console.log("is this really working ");
     controlSetupQuiz(queryStringData.questionType, queryStringData);
   } else {
-    console.log("no lolol");
+
   }
 };
 
