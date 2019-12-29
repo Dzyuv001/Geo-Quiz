@@ -7,46 +7,39 @@ import Feedback from "./models/feedback";
 
 import * as util from "./utility";
 
-const controlSetupQuiz = questionType => {
-  let queryString = "";
-  queryString = util.getQueryString();
-  console.log("we are here ", queryString);
-  if (queryString == "") {
+const controlSetupQuiz = (questionType, queryStringData) => {
+  if (queryStringData) {
+    console.log("queryStringData:",queryStringData)
     state.quiz = new Quiz({
       questionType,
-      seed: queryString.seed,
-      numQuestions: queryString.numQuestions,
-      continentsMask: queryString.continentsMask
+      seed: queryStringData.seed,
+      numQuestions: queryStringData.numQuestions,
+      continentsMask: queryStringData.continentsMask
     });
     state.feedback = new Feedback({
       questionType,
-      seed: queryString.seed,
-      numQuestions: queryString.numQuestions,
-      continentsMask: queryString.continentsMask
+      seed: queryStringData.seed,
+      numQuestions: queryStringData.numQuestions,
+      continentsMask: queryStringData.continentsMask
     });
   } else {
     const userOptions = setupQuizView.getInput();
-    console.log("the user input values", userOptions);
     let seed;
     state.quiz = new Quiz({
       numQuestions: userOptions.numQuestions,
       continentsMask: userOptions.continentsMask
     });
     seed = state.quiz.getSeed();
-    state.feedback = new Feedback({
+    const quizData  = {
       questionType,
       seed,
       numQuestions: userOptions.numQuestions,
       continentsMask: userOptions.continentsMask
-    });
-    queryString = {
-      questionType,
-      continentsMask: userOptions.continentsMask,
-      seed
     };
-    console.log("the data tha that is being passed is", queryString);
-    util.setQueryString(queryString);
+    state.feedback = new Feedback(quizData);
+    util.setQueryString(quizData);
   }
+  console.log("the question type of the quiz", questionType);
   state.quiz.genQuestions(questionType);
   quizView.resetScoreboard(state.quiz.getNumQuestions());
   quizView.renderQuizQuestion(state.quiz.getCurrentQuestionRenderData());
@@ -67,7 +60,6 @@ const controlQuiz = option => {
     //show correct and incorrect answers
 
     //gather data for feedback obj
-    console.log("debug data", correctIndex, option);
     const correctAns = state.quiz.getNameOfOption(correctIndex);
     const userAns = state.quiz.getNameOfOption(option);
     const data = state.quiz.getQuestionData();
@@ -98,7 +90,6 @@ const controlQuiz = option => {
       //set correct amount
       state.feedback.setCorrectAnswers(state.quiz.getCorrectCount());
       //render feedback data
-      console.log("the feedback data ", state.feedback.feedback);
       feedbackView.renderFeedback(state.feedback.feedback);
     }
   }
@@ -119,40 +110,39 @@ document.getElementById("btnQuitQuiz").addEventListener("click", e => {
 });
 
 document.getElementById("btnRestart").addEventListener("click", e => {
-  controlSetupQuiz();
+  let questionType = util.getQueryString().questionType;
+  controlSetupQuiz(questionType, false);
 });
 
 document.getElementById("btnShare").addEventListener("click", e => {
   let copyError = copyPageURL();
-  if (copyError){
-    e.target.setAttribute("title","Failed to copy URL");
-  }else {
-    e.target.setAttribute("title","URL Copied");
+  if (copyError) {
+    e.target.setAttribute("title", "Failed to copy URL");
+  } else {
+    e.target.setAttribute("title", "URL Copied");
   }
 });
 
 const copyPageURL = async () => {
-  let hasError = false;
   //https://web.dev/image-support-for-async-clipboard/
   try {
     await navigator.clipboard.writeText(location.href);
-    console.log('Page URL copied to clipboard');
-    return false
+    console.log("Page URL copied to clipboard");
+    return false;
   } catch (err) {
-    console.error('Failed to copy: ', err);
+    console.error("Failed to copy: ", err);
     return true;
   }
-}
+};
 
 document.getElementById("btnRetry").addEventListener("click", e => {
   //hide feedback quiz view
   const queryData = util.getQueryString();
 
   feedbackView.hideContainer();
-
-  setupQuizView.showContainer();
-  console.log("the data is being read from the thing ", queryData);
-  controlSetupQuiz(queryData.questionType);
+console.log("the query string data", queryData);
+  quizView.showContainer();
+  controlSetupQuiz(queryData.questionType,queryData);
 });
 
 document.getElementById("btnCustomQuiz").addEventListener("click", e => {
@@ -166,6 +156,7 @@ document.querySelector(".quiz__options").addEventListener("click", e => {
   if (e.target && e.target.className.includes("btnGeo")) {
     controlQuiz(e.target.getAttribute("data-value"));
   }
+  console.log("option selected");
 });
 
 const init = () => {

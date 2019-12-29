@@ -29,10 +29,6 @@ export const getQueryString = () => {
       let paramName = temp[0];
       let paramValue = typeof temp[1] === "undefined" ? true : temp[1];
 
-      paramName = paramName.toLowerCase();
-      if (typeof paramValue === "string")
-        paramValue = paramValue.toLocaleLowerCase();
-
       if (paramName.match(/\[(\d+)?\]$/)) {
         let key = paramName.replace(/\[(\d+)?\]$/, "");
         if (!obj[key]) obj[key] = [];
@@ -56,5 +52,4 @@ export const getQueryString = () => {
     }
   }
   return obj;
-  return {};
 };

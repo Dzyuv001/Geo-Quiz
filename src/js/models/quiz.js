@@ -6,14 +6,13 @@ export default class Quiz {
   constructor(quizData) {
     // check if there is random seed
     if (quizData.seed) {
-      this.seed = queryString.seed;
+      this.seed = quizData.seed;
     } else {
       this.seed = (Math.random() + "").split(".")[1];
     }
     this.numQuestions = quizData.numQuestions;
     this.seedRandom = seedRandom(this.seed);
-    this.correctCount = 0;
-    this.questionIndex = 0; //current question number
+    this.resetQuiz();
     this.idsList = this.getIdsList(quizData.continentsMask);
     this.idsAmount = this.idsList.length - 1;
     this.questions = [];
@@ -25,7 +24,6 @@ export default class Quiz {
   }
 
   getCorrectCount() {
-    console.log("the number of correct answer",this.correctCount);
     return this.correctCount;
   }
 
@@ -44,6 +42,11 @@ export default class Quiz {
   getNumQuestions() {
     return this.numQuestions;
   }
+
+resetQuiz(){
+  this.correctCount = 0;
+    this.questionIndex = 0; //current question number
+}
 
   getIdsList(continentMask) {
     let ids = [];
@@ -118,6 +121,7 @@ export default class Quiz {
   }
 
   getCurrentQuestionRenderData() {
+    console.log("the question that is being rendered", this.getCurrentQuestion(),this.questionType)
     return {
       question: this.getCurrentQuestion(),
       questionType: this.questionType
