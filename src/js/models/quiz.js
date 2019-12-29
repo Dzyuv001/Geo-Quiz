@@ -43,10 +43,10 @@ export default class Quiz {
     return this.numQuestions;
   }
 
-resetQuiz(){
-  this.correctCount = 0;
+  resetQuiz() {
+    this.correctCount = 0;
     this.questionIndex = 0; //current question number
-}
+  }
 
   getIdsList(continentMask) {
     let ids = [];
@@ -121,14 +121,18 @@ resetQuiz(){
   }
 
   getCurrentQuestionRenderData() {
-    console.log("the question that is being rendered", this.getCurrentQuestion(),this.questionType)
+    console.log(
+      "the question that is being rendered",
+      this.getCurrentQuestion(),
+      this.questionType
+    );
     return {
       question: this.getCurrentQuestion(),
       questionType: this.questionType
     };
   }
 
-  getQuestionType(){
+  getQuestionType() {
     return this.questionType;
   }
 
@@ -139,14 +143,7 @@ resetQuiz(){
 
   //used to scrabble the array so that the answer doesn't show up in the same position
   randArray(array) {
-    let randArray = array;
-    for (let i = 0; i < array.length; i++) {
-      const randIndex = this.genRandNum(4);
-      //remove and read add the number to the back
-      let removeValue = randArray.splice(randIndex, 1)[0];
-      randArray.push(removeValue);
-    }
-    return randArray;
+    return array.sort(() => this.seedRandom() - 0.5);
   }
 
   isCorrect(userAnswer) {
@@ -154,15 +151,6 @@ resetQuiz(){
     const correctAnswer = currentQuestion.answer;
     const userOption = currentQuestion.options[userAnswer].id;
     const correct = correctAnswer == userOption;
-    //increment the question number
-    console.log("the question index is", this.questionIndex);
-    console.log(
-      correctAnswer,
-      userOption,
-      this.questionIndex,
-      userAnswer,
-      correct
-    );
     if (correct) {
       this.correctCount += 1;
     }
