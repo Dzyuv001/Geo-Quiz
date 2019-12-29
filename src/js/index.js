@@ -108,8 +108,8 @@ document.getElementById("btnQuitQuiz").addEventListener("click", e => {
 });
 
 document.getElementById("btnRestart").addEventListener("click", e => {
-  let questionType = util.getQueryString();
-  controlSetupQuiz(questionType);
+  let queryStringData = util.getQueryString();
+  controlSetupQuiz(queryStringData.questionType, queryStringData);
 });
 
 document.getElementById("btnShare").addEventListener("click", e => {
