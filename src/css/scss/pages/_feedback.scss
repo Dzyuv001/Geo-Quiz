@@ -5,11 +5,12 @@
     height: 30rem;
     overflow-y: scroll;
     overflow-x: hidden;
-
+    padding-top: 4rem;
     &-heading {
       position: fixed;
-      left: 50%;
-      transform: translate(-50%, 0);
+      margin-top: -15rem;
+      margin: auto;
+      transform: translate(0, -5rem);
       width: 92.5%;
       background: white;
       z-index: 20;
@@ -31,7 +32,7 @@
       width: 35%;
     }
   }
-  &__medal{
+  &__medal {
     display: inline-block;
   }
 

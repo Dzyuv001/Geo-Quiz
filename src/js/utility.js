@@ -3,10 +3,8 @@ export const setQueryString = data => {
   let queryString = "?";
   let dataKeys = Object.keys(data);
   dataKeys.forEach((key, i) => {
-      console.log("test for data",key,data[key])
-    queryString += `${key}=${data[key]}${
-      i != dataKeys.length - 1 ? "&" : ""
-    }`;
+    console.log("test for data", key, data[key]);
+    queryString += `${key}=${data[key]}${i != dataKeys.length - 1 ? "&" : ""}`;
   });
   history.pushState({}, "Quiz", currentURL + queryString);
 };
@@ -28,6 +26,10 @@ export const getQueryString = () => {
 
       let paramName = temp[0];
       let paramValue = typeof temp[1] === "undefined" ? true : temp[1];
+
+      if (paramValue == "false" || paramValue == "true") {
+        paramValue = paramValue == "true";
+      }
 
       if (paramName.match(/\[(\d+)?\]$/)) {
         let key = paramName.replace(/\[(\d+)?\]$/, "");

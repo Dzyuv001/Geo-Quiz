@@ -27,7 +27,7 @@ export const showCorrect = correctIndex => {
 
 export const toggleOptionBtns = isDisabled => {
   //loop through all the option buttons
-  base.elements.quizOptionBtn.forEach((btn, i) => {
+  base.elements.quizOptionBtn.forEach(btn => {
     //see button to disabled or enabled based on the isDisabled value
     btn.disabled = isDisabled;
   });
@@ -45,6 +45,7 @@ export const renderQuestion = questionData => {
   }
   return htmlMarkup;
 };
+
 export const renderOptions = options => {
   base.elements.quizOptionBtn.forEach((btn, i) => {
     btn.innerHTML = options[i].name;
@@ -52,8 +53,10 @@ export const renderOptions = options => {
     btn.classList.remove("btnGeo--incorrect");
   });
 };
+
 export const renderQuizQuestion = questionData => {
   //question
+  console.log("question data", questionData);
   base.elements.quizQuestionContainer.innerHTML = renderQuestion(questionData);
   renderOptions(questionData.question.options);
 };

@@ -10,18 +10,15 @@ import * as util from "./utility";
 const controlSetupQuiz = (questionType, queryStringData) => {
   if (queryStringData) {
     console.log("queryStringData:",queryStringData)
-    state.quiz = new Quiz({
+    const quizData = {
       questionType,
       seed: queryStringData.seed,
       numQuestions: queryStringData.numQuestions,
       continentsMask: queryStringData.continentsMask
-    });
-    state.feedback = new Feedback({
-      questionType,
-      seed: queryStringData.seed,
-      numQuestions: queryStringData.numQuestions,
-      continentsMask: queryStringData.continentsMask
-    });
+    };
+    console.log("the data is now")
+    state.quiz = new Quiz(quizData);
+    state.feedback = new Feedback(quizData);
   } else {
     const userOptions = setupQuizView.getInput();
     let seed;
@@ -45,6 +42,7 @@ const controlSetupQuiz = (questionType, queryStringData) => {
   quizView.renderQuizQuestion(state.quiz.getCurrentQuestionRenderData());
   setupQuizView.hideContainer();
   quizView.showContainer();
+  quizView.toggleOptionBtns(false);
 };
 
 const controlQuiz = option => {
@@ -110,8 +108,8 @@ document.getElementById("btnQuitQuiz").addEventListener("click", e => {
 });
 
 document.getElementById("btnRestart").addEventListener("click", e => {
-  let questionType = util.getQueryString().questionType;
-  controlSetupQuiz(questionType, false);
+  let questionType = util.getQueryString();
+  controlSetupQuiz(questionType);
 });
 
 document.getElementById("btnShare").addEventListener("click", e => {
