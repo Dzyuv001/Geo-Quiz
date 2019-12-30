@@ -16,7 +16,6 @@ const controlSetupQuiz = (questionType, queryStringData) => {
       numQuestions: queryStringData.numQuestions,
       continentsMask: queryStringData.continentsMask
     };
-    console.log("the data is now");
     state.quiz = new Quiz(quizData);
     state.feedback = new Feedback(quizData);
   } else {
@@ -36,13 +35,16 @@ const controlSetupQuiz = (questionType, queryStringData) => {
     state.feedback = new Feedback(quizData);
     util.setQueryString(quizData);
   }
-  console.log("the question type of the quiz", questionType);
-  state.quiz.genQuestions(questionType);
-  quizView.resetScoreboard(state.quiz.getNumQuestions());
-  quizView.renderQuizQuestion(state.quiz.getCurrentQuestionRenderData());
-  setupQuizView.hideContainer();
-  quizView.showContainer();
-  quizView.toggleOptionBtns(false);
+  // if (state.quiz.isPlayable()) {
+    state.quiz.genQuestions(questionType);
+    quizView.resetScoreboard(state.quiz.getNumQuestions());
+    quizView.renderQuizQuestion(state.quiz.getCurrentQuestionRenderData());
+    setupQuizView.hideContainer();
+    quizView.showContainer();
+    quizView.toggleOptionBtns(false);
+  // }else {
+
+  // }
 };
 
 const controlQuiz = option => {
@@ -165,7 +167,6 @@ const init = () => {
   if (Object.entries(queryStringData).length !== 0) {
     controlSetupQuiz(queryStringData.questionType, queryStringData);
   } else {
-
   }
 };
 

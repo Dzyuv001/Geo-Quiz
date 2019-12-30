@@ -19,6 +19,11 @@ export default class Quiz {
     this.questionType;
   }
 
+isPlayable(){
+  return this.idsAmount+1 >= this.numQuestions;
+}
+
+
   getQuestionIndex() {
     return this.questionIndex;
   }
@@ -69,11 +74,11 @@ export default class Quiz {
     let usedIds = [];
     for (let i = 0; i < this.numQuestions; i++) {
       let randId = this.idsList[this.genRandNum(this.idsAmount)];
-      //if the id has been seen loop again until unique id is made
-      if (usedIds.includes(randId)) {
-        i--;
-        continue;
-      }
+      // //if the id has been seen loop again until unique id is made
+      // if (usedIds.includes(randId)) {
+      //   i--;
+      //   continue;
+      // }
       //add the capital and the answer to the question
       this.questions.push({
         capital: countryData[randId].capital,
