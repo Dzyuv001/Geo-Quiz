@@ -1,14 +1,13 @@
 //MEDIA QUERY DATA
-// 16px is one 1rem default 
+// 16px is one 1rem default
 $bp-largest: 75em; //1200px  12/16 = 0.75
 $bp-large: 68.75em; //1100px 11/16 = 0.6875
 $bp-medium: 56.25em; //900px 9/16 = 0.5625
 $bp-small: 37.5em; //600px 6/16 = 0.375
 $bp-smallest: 31.25em; //500px 5/16 = 0.3125
 
-
 //text colors
-$color-text-white:#fff;
+$color-text-white: #fff;
 $color-text-grey-light1: #aaa;
 $color-text-grey-light2: #999;
 $color-text-grey-dark1: #333;
@@ -16,4 +15,75 @@ $color-text-grey-dark1: #333;
 //button colour
 $green--dark: #165224;
 $red--dark: #92242f;
-$dodgerblue--dark:#0c4a88;
+$dodgerblue--dark: #0c4a88;
+
+//medal-color
+$medal-platinum: #5f6d8b;
+$medal-platinum-dark: darken(
+  $color: #5f6d8b,
+  $amount: 10%
+);
+$medal-platinum-ribbon: #3479b1;
+$medal-platinum-ribbon-dark: darken(
+  $color: #3479b1,
+  $amount: 10%
+);
+$medal-gold: #daa520;
+$medal-gold-dark: darken(
+  $color: #daa520,
+  $amount: 10%
+);
+$medal-gold-ribbon: #be3a3a;
+$medal-gold-ribbon-dark: darken(
+  $color: #be3a3a,
+  $amount: 10%
+);
+$medal-silver: #d3d3d3;
+$medal-silver-dark: darken(
+  $color: #d3d3d3,
+  $amount: 10%
+);
+$medal-silver-ribbon: #8442b1;
+$medal-silver-ribbon-dark: darken(
+  $color: #8442b1,
+  $amount: 10%
+);
+$medal-bronze: #b16c27;
+$medal-bronze-dark: darken(
+  $color: #b16c27,
+  $amount: 10%
+);
+$medal-bronze-ribbon: #1d953b;
+$medal-bronze-ribbon-dark: darken(
+  $color: #1d953b,
+  $amount: 10%
+);
+$medal-wood: #f8e2ba;
+$medal-wood-dark: darken(
+  $color: $medal-wood,
+  $amount: 10%
+);
+$medal-wood-ribbon: #dcdf43;
+$medal-wood-ribbon-dark: darken(
+  $color: #dcdf43,
+  $amount: 10%
+);
+
+//medalSelectors
+
+$medal__platinum: ".medal__platinum";
+$medal__gold: ".medal__gold";
+$medal__silver: ".medal__silver";
+$medal__bronze: ".medal__bronze";
+$medal__wood: ".medal__wood";
+
+$platinum: ".medal__platinum", $medal-platinum, $medal-platinum-dark,
+  $medal-platinum-ribbon, $medal-platinum-ribbon-dark;
+$gold: ".medal__gold", $medal-gold, $medal-gold-dark, $medal-gold-ribbon,
+  $medal-gold-ribbon-dark;
+$silver: ".medal__silver", $medal-silver, $medal-silver-dark,
+  $medal-silver-ribbon, $medal-silver-ribbon-dark;
+$bronze: ".medal__bronze", $medal-bronze, $medal-bronze-dark,
+  $medal-bronze-ribbon, $medal-bronze-ribbon-dark;
+$wood: ".medal__wood", $medal-wood, $medal-wood-dark, $medal-wood-ribbon,
+  $medal-wood-ribbon-dark;

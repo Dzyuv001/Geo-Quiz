@@ -13,7 +13,7 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
   }
 
   & * {
@@ -30,8 +30,8 @@
     z-index: 20;
     padding: 3rem;
     transform: translate(-50%, -50%) scale(1);
+   
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-
     animation: flipOut 1s ease-in-out 2s 1 forwards;
     & * {
       opacity: 1;
@@ -54,6 +54,11 @@
     margin: auto;
     &--thin {
       width: 50%;
+    }
+    &--ui {
+      @media only screen and (max-width:$bp-small) {
+       margin-top: -2rem;
+      }
     }
   }
 }

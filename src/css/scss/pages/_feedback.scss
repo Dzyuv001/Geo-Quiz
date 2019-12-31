@@ -5,7 +5,7 @@
     height: 30rem;
     overflow-y: scroll;
     overflow-x: hidden;
-    padding-top: 4rem;
+    padding-top: 5rem;
     &-heading {
       position: fixed;
       margin-top: -15rem;
@@ -36,11 +36,20 @@
     display: inline-block;
   }
 
+&__message {
+  display: inline-block;
+}
+
   &__container {
     height: 50rem;
   }
   &__image {
     height: 4rem;
     border: 2px solid #ccc;
+  }
+
+  &__btn {
+    width: 30%;
+    margin: 1rem 1%;
   }
 }

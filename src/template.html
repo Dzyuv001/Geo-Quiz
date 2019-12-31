@@ -108,7 +108,7 @@
                     </div>
             </div>
             </form>
-            <div class="container__sub">
+            <div class="container__sub container__sub--ui">
                 <button type="button" id="btnStartFlagQuiz" class="btn btn-primary">Start Flag Quiz</button>
                 <button type="button" id="btnStartCapitalQuiz" class="btn btn-primary">Start Capital
                     Quiz</button>
@@ -138,8 +138,12 @@
         </div>
     </div>
     <div class="container feedback">
-        <div class="feedback__medal medal"></div>
-        <h2 class="heading-3 feedback__message"></h2>
+        <div class="feedback__medal medal">
+            <div class="medal__coin"></div>
+            <div class="medal__ribbon medal__ribbon--left"></div>
+            <div class="medal__ribbon medal__ribbon--right"></div>
+        </div>
+        <h1 class="heading-1 feedback__message"></h1>
         <div class="feedback__table">
             <table class="table">
                 <thead class="feedback__table-heading">
@@ -154,15 +158,14 @@
                 <tbody class="feedback__table-rows feedback__table-body">
                 </tbody>
             </table>
-
         </div>
-        <div class="container__sub">
-            <button type="button" id="btnShare" class="btn btn-primary" data-toggle="tooltip" data-placement="top"
-                title="Click to copy URL">
+        <div class="container__sub  container__sub--ui">
+            <button type="button" id="btnShare" class="btn btn-primary feedback__btn" data-toggle="tooltip"
+                data-placement="top" title="Click to copy URL">
                 Share Quiz
             </button>
-            <button type="button" id="btnRetry" class="btn btn-primary">Retry</button>
-            <button type="button" id="btnCustomQuiz" class="btn btn-primary">Custom Quiz</button>
+            <button type="button" id="btnRetry" class="btn btn-primary feedback__btn">Retry</button>
+            <button type="button" id="btnCustomQuiz" class="btn btn-primary feedback__btn">Custom Quiz</button>
         </div>
     </div>
 </body>

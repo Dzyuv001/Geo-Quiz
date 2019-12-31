@@ -3,16 +3,20 @@
   height: 33rem;
   padding: 1.5rem;
   border-radius: 50%;
-  margin-top: -20rem;
+  margin-top: -18rem;
   background: white;
   &__title {
     position: absolute;
     top: -20%;
     left: 50%;
+    width: 140%;
     transform: translate(-50%, -50%);
     letter-spacing: 1.2rem ;
     z-index: 2;
     -webkit-text-stroke: .2rem #eee;
+    @media only screen and (max-width: $bp-small) {
+      top: -10%;
+    }
   }
 
   &__container {
@@ -27,10 +31,15 @@
     margin: auto;
     height: 30rem;
     width: 31.5rem;
-    margin-left: -1.5rem;
+    margin-left: -2.5rem;
     background-image: url(/assets/worldMap.svg);
     background-size: 60rem, 60rem;
     background-position: 0%, 50%;
     animation: moveBackground 10s linear infinite;
   }
+
+  
+
+ 
+
 }
