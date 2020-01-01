@@ -9,9 +9,8 @@
   outline: none;
   border: none;
   border-radius: 1rem;
-  box-shadow: 0 9px $dodgerblue--dark;
+  box-shadow: 0 .9rem $dodgerblue--dark;
   transition: all 0.2s ease-in-out;
-  transform: translateY(-0.4rem);
 
   &--circle {
     color: white;
@@ -25,14 +24,13 @@
 
   &:hover,
   &:active {
-    box-shadow: 0 5px $dodgerblue--dark;
-    transform: translateY(-0.5rem);
+    box-shadow: 0 .5rem $dodgerblue--dark;
+    transform: translateY(.4rem);
   }
 }
 .btnGeo {
   width: 45%;
   margin: 1%;
-  transform: translateY(-0.4rem);
 
   &--correct:disabled {
     background: $green;

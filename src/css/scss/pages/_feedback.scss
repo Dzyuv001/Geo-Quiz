@@ -1,5 +1,10 @@
 .feedback {
   text-align: center;
+
+  &__heading > * {
+    float: left;
+  }
+
   &__table {
     position: relative;
     height: 30rem;
@@ -15,6 +20,7 @@
       background: white;
       z-index: 20;
     }
+
     &-body:before {
       margin-top: 3rem;
     }
@@ -38,6 +44,7 @@
 
 &__message {
   display: inline-block;
+  line-height: 15rem;
 }
 
   &__container {
