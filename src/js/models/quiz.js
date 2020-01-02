@@ -17,12 +17,21 @@ export default class Quiz {
     this.idsAmount = this.idsList.length - 1;
     this.questions = [];
     this.questionType;
+    this.isQuizRunning = false;
   }
 
 isPlayable(){
   return this.idsAmount+1 >= this.numQuestions;
 }
 
+
+setQuizRunning(running){
+  this.isQuizRunning = running;
+}
+
+getQuizRunning(){
+  return this.isQuizRunning;
+}
 
   getQuestionIndex() {
     return this.questionIndex;
@@ -67,6 +76,7 @@ isPlayable(){
     this.questionType = questionType;
     this.genQuestionNAnswers();
     this.genOptions();
+    this.setQuizRunning(true);
   }
 
   genQuestionNAnswers() {

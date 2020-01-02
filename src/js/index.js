@@ -35,16 +35,15 @@ const controlSetupQuiz = (questionType, queryStringData) => {
     state.feedback = new Feedback(quizData);
     util.setQueryString(quizData);
   }
-  // if (state.quiz.isPlayable()) {
-    state.quiz.genQuestions(questionType);
-    quizView.resetScoreboard(state.quiz.getNumQuestions());
-    quizView.renderQuizQuestion(state.quiz.getCurrentQuestionRenderData());
-    setupQuizView.hideContainer();
-    quizView.showContainer();
-    quizView.toggleOptionBtns(false);
-  // }else {
 
-  // }
+  //set up state to prevent user from mashing buttons to get through the quiz
+  state.events.optionKeyEventPressable = true;
+  state.quiz.genQuestions(questionType);
+  quizView.resetScoreboard(state.quiz.getNumQuestions());
+  quizView.renderQuizQuestion(state.quiz.getCurrentQuestionRenderData());
+  setupQuizView.hideContainer();
+  quizView.showContainer();
+  quizView.toggleOptionBtns(false);
 };
 
 const controlQuiz = option => {
@@ -57,7 +56,6 @@ const controlQuiz = option => {
     quizView.toggleOptionBtns(true);
     //get Index of correct answer
     const correctIndex = state.quiz.getCorrectIndex();
-    //show correct and incorrect answers
 
     //gather data for feedback obj
     const correctAns = state.quiz.getNameOfOption(correctIndex);
@@ -81,8 +79,16 @@ const controlQuiz = option => {
         quizView.toggleOptionBtns(false);
         //render next question
         quizView.renderQuizQuestion(state.quiz.getCurrentQuestionRenderData());
+
+        //the time out is set based on avarage human raction time giving the user a time limit to read the question
+        setTimeout(() => {
+          //enable the use to
+          state.events.optionKeyEventPressable = true;
+        }, 250);
       }, 750);
     } else {
+      //set quiz running to false to prevent keyup events from calling this function
+      state.quiz.setQuizRunning(false);
       //hide quiz page
       quizView.hideContainer();
       //show the feedback page
@@ -95,25 +101,31 @@ const controlQuiz = option => {
   }
 };
 
-//events
+//EVENTS
+
+//start flag quiz button event
 document.getElementById("btnStartFlagQuiz").addEventListener("click", e => {
   controlSetupQuiz(false);
 });
 
+//start capital quiz button event
 document.getElementById("btnStartCapitalQuiz").addEventListener("click", e => {
   controlSetupQuiz(true);
 });
 
+//quit quiz button event
 document.getElementById("btnQuitQuiz").addEventListener("click", e => {
   setupQuizView.showContainer();
   quizView.hideContainer();
 });
 
+//restart quiz during quiz button event
 document.getElementById("btnRestart").addEventListener("click", e => {
   let queryStringData = util.getQueryString();
   controlSetupQuiz(queryStringData.questionType, queryStringData);
 });
 
+//share quiz button event
 document.getElementById("btnShare").addEventListener("click", e => {
   let copyError = copyPageURL();
   if (copyError) {
@@ -124,6 +136,7 @@ document.getElementById("btnShare").addEventListener("click", e => {
 });
 
 const copyPageURL = async () => {
+  // function used to copy data from url sourced from link see below
   //https://web.dev/image-support-for-async-clipboard/
   try {
     await navigator.clipboard.writeText(location.href);
@@ -136,12 +149,13 @@ const copyPageURL = async () => {
 };
 
 document.getElementById("btnRetry").addEventListener("click", e => {
-  //hide feedback quiz view
   const queryData = util.getQueryString();
 
+  //hide feedback quiz view
   feedbackView.hideContainer();
-  console.log("the query string data", queryData);
+  //show quiz view
   quizView.showContainer();
+  //pass data for the quiz to be generated
   controlSetupQuiz(queryData.questionType, queryData);
 });
 
@@ -152,21 +166,36 @@ document.getElementById("btnCustomQuiz").addEventListener("click", e => {
   setupQuizView.showContainer();
 });
 
+//quiz option button press event
 document.querySelector(".quiz__options").addEventListener("click", e => {
   if (e.target && e.target.className.includes("btnGeo")) {
     controlQuiz(e.target.getAttribute("data-value"));
   }
 });
 
+//number key press event
+document.addEventListener("keyup", e => {
+  if (state.quiz && state.quiz.getQuizRunning() && state.events.optionKeyEventPressable) {
+    const keyOptions = [49, 50, 51, 52];
+    const keyCodesToOptions = { "49": 0, "50": 1, "51": 2, "52": 3 };
+    if (keyOptions.includes(e.keyCode)) {
+      state.events.optionKeyEventPressable = false;
+      controlQuiz(keyCodesToOptions[e.keyCode]);
+    }
+  }
+  console.log("key pressed was :", e.keyCode);
+});
+
+//STARTING FUNCTION
 const init = () => {
   let state = {};
   window.state = state;
+  state.events = {};
   setupQuizView.showContainer();
   state.util = util;
   const queryStringData = util.getQueryString();
   if (Object.entries(queryStringData).length !== 0) {
     controlSetupQuiz(queryStringData.questionType, queryStringData);
-  } else {
   }
 };
 
