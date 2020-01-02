@@ -17,7 +17,7 @@
       margin: auto;
       transform: translate(0, -5rem);
       width: 92.5%;
-      background: white;
+      background: $color-white;
       z-index: 20;
     }
 
@@ -52,7 +52,7 @@
   }
   &__image {
     height: 4rem;
-    border: 2px solid #ccc;
+    border: 2px solid $color-text-grey-light1;
   }
 
   &__btn {

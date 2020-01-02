@@ -1,15 +1,16 @@
 import * as base from "./base";
 
+//used to hide the view
 export const showContainer = () => {
   base.flipUpContainer(base.elements.containerFeedback);
 };
 
+//used to hide the view
 export const hideContainer = () => {
   base.flipOutContainer(base.elements.containerFeedback);
 };
 
-const renderShareDisplayContainer = () => {};
-
+//used to set the render the message and the medal
 const renderScore = (numCorrect,numQuestions) =>{
   const percentCorrect = Math.round((numCorrect / numQuestions) * 100);
   const medal = base.elements.feedbackMedal;
@@ -35,7 +36,7 @@ const renderScore = (numCorrect,numQuestions) =>{
   medal.classList.add(medalType[medalIndex]);
 }
 
-
+//used to render the table that will display a table showing what the user selected during their quiz
 const renderFeedbackTable = (questionType, questions) => {
   const stringQuestionType = questionType ? "Capital" : "Flag";
   base.elements.feedbackQuestionType.innerHTML = stringQuestionType;
@@ -46,6 +47,7 @@ const renderFeedbackTable = (questionType, questions) => {
   base.elements.feedbackTableRows.innerHTML = htmlMarkup;
 };
 
+//used to render individual rows (created for readability )
 const renderRow = (question, questionType) => {
   let dataColumn = questionType
     ? question.data
@@ -65,8 +67,8 @@ const renderRow = (question, questionType) => {
   return markup;
 };
 
+//main render method to simplify access the feedback view
 export const renderFeedback = feedback => {
-  console.log("the feedback", feedback, feedback.numCorrect);
   renderScore(feedback.numCorrect,feedback.numQuestions);
   renderFeedbackTable(feedback.questionType, feedback.questions);
 };

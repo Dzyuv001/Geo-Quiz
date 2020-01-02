@@ -1,3 +1,4 @@
+//used to store the quiz settings in the url string
 export const setQueryString = data => {
   let currentURL = document.URL.split("?")[0];
   let queryString = "?";
@@ -9,6 +10,7 @@ export const setQueryString = data => {
   history.pushState({}, "Quiz", currentURL + queryString);
 };
 
+//get the data from the url and return it as an object
 export const getQueryString = () => {
   let url = document.URL;
   // this is being used to support the older browsers that do not have the access to the URL object

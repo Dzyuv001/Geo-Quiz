@@ -1,28 +1,29 @@
 export default class Feedback {
   constructor(feedback) {
-    this.feedback = {
-      questionType: feedback.questionType,
-      numQuestions: feedback.numQuestions,
-      numCorrect:0,
-      seed: feedback.seed,
-      continentsMask: feedback.continentsMask,
-      questions: []
-    };
+    this.questionType = feedback.questionType;
+    this.numQuestions = feedback.numQuestions;
+    this.numCorrect = 0;
+    this.seed = feedback.seed;
+    this.continentsMask = feedback.continentsMask;
+    this.questions = [];
   }
 
+  //add question to the feedback section
   addQuestionFeedback(questionAnswer, userAnswer, data) {
-    this.feedback.questions.push({
+    this.questions.push({
       questionAnswer,
       userAnswer,
       data
     });
   }
 
-  setCorrectAnswers(numCorrect){
-      this.feedback.numCorrect = numCorrect;
+  //used to set the amount of questions answered correctly
+  setCorrectAnswers(numCorrect) {
+    this.numCorrect = numCorrect;
   }
 
-  getFeedBackData() {
-      return this.feedback;
+  // set tje feedback object
+  getFeedbackData() {
+    return this;
   }
 }

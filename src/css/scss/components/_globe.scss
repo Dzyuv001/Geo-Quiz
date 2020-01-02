@@ -11,9 +11,9 @@
     left: 50%;
     width: 140%;
     transform: translate(-50%, -50%);
-    letter-spacing: 1.2rem ;
+    letter-spacing: 1.2rem;
     z-index: 2;
-    -webkit-text-stroke: .2rem #eee;
+    -webkit-text-stroke: 0.2rem #eee;
     @media only screen and (max-width: $bp-small) {
       top: -10%;
     }
@@ -37,9 +37,4 @@
     background-position: 0%, 50%;
     animation: moveBackground 10s linear infinite;
   }
-
-  
-
- 
-
 }

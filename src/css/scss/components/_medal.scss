@@ -25,6 +25,7 @@
     }
   }
 }
+//medal css generation
 @include colorMedal($platinum);
 @include colorMedal($gold);
 @include colorMedal($silver);

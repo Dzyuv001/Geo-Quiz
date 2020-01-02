@@ -1,3 +1,4 @@
+//animate the background so that the gradient shifts
 @keyframes shiftGradient {
   0% {
     background-position: 0 50%;
@@ -11,6 +12,7 @@
   }
 }
 
+//used to move the map background image in a loop to make ot look like a 2d globe rotating 
 @keyframes moveBackground {
   0% {
     background-position: 0%, 50%;
@@ -21,6 +23,7 @@
   }
 }
 
+//fade in the elements
 @keyframes fadeIn {
   0%,
   90% {
@@ -31,6 +34,7 @@
   }
 }
 
+//fade out the elements
 @keyframes fadeOut {
   0%,
   90% {
@@ -40,7 +44,8 @@
     opacity: 0;
   }
 }
-
+// move the element in a pseudo- blob bounce motion from the bottom of the screen to 
+//the center of the screen making the element the center of users attention
 @keyframes flipUp {
   0% {
     position: absolute;
@@ -84,6 +89,7 @@
   }
 }
 
+//perform the flipUp animation in reverse
 @keyframes flipOut {
   0% {
     top: 50%;

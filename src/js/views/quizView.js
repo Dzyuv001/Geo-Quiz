@@ -1,22 +1,27 @@
 import * as base from "./base";
 
+//used to hide the view
 export const showContainer = () => {
   base.flipUpContainer(base.elements.containerQuiz);
 };
 
+//used to hide the view
 export const hideContainer = () => {
   base.flipOutContainer(base.elements.containerQuiz);
 };
 
+//used to set the total number of questions
 export const resetScoreboard = totalValue => {
   base.elements.quizTotal.innerHTML = totalValue;
   updateScoreboard(0);
 };
 
+////update the scoreboard to show the amount of correct answers the user has made
 export const updateScoreboard = currentScore => {
   base.elements.quizCorrect.innerHTML = currentScore;
 };
 
+//used to show what answer was correct by making the btn green and the rest red
 export const showCorrect = correctIndex => {
   base.elements.quizOptionBtn.forEach((btn, i) => {
     btn.classList.add(
@@ -25,6 +30,7 @@ export const showCorrect = correctIndex => {
   });
 };
 
+//used to enable or disable btn to allow the user select options when the quiz game is ready
 export const toggleOptionBtns = isDisabled => {
   //loop through all the option buttons
   base.elements.quizOptionBtn.forEach(btn => {
@@ -33,6 +39,7 @@ export const toggleOptionBtns = isDisabled => {
   });
 };
 
+//used to render the question
 export const renderQuestion = questionData => {
   let htmlMarkup = "";
   if (questionData.questionType) {
@@ -46,6 +53,7 @@ export const renderQuestion = questionData => {
   return htmlMarkup;
 };
 
+//render the multiple choices to answer the question
 export const renderOptions = options => {
   base.elements.quizOptionBtn.forEach((btn, i) => {
     btn.innerHTML = options[i].name;
@@ -54,9 +62,8 @@ export const renderOptions = options => {
   });
 };
 
+//render current quiz question to allow the user to answer it
 export const renderQuizQuestion = questionData => {
-  //question
-  console.log("question data", questionData);
   base.elements.quizQuestionContainer.innerHTML = renderQuestion(questionData);
   renderOptions(questionData.question.options);
 };

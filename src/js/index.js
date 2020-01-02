@@ -9,7 +9,6 @@ import * as util from "./utility";
 
 const controlSetupQuiz = (questionType, queryStringData) => {
   if (queryStringData) {
-    console.log("queryStringData:", queryStringData);
     const quizData = {
       questionType,
       seed: queryStringData.seed,
@@ -96,7 +95,7 @@ const controlQuiz = option => {
       //set correct amount
       state.feedback.setCorrectAnswers(state.quiz.getCorrectCount());
       //render feedback data
-      feedbackView.renderFeedback(state.feedback.feedback);
+      feedbackView.renderFeedback(state.feedback.getFeedbackData());
     }
   }
 };
@@ -183,7 +182,6 @@ document.addEventListener("keyup", e => {
       controlQuiz(keyCodesToOptions[e.keyCode]);
     }
   }
-  console.log("key pressed was :", e.keyCode);
 });
 
 //STARTING FUNCTION
