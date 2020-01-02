@@ -20,58 +20,6 @@ export default class Quiz {
     this.isQuizRunning = false;
   }
 
-isPlayable(){
-  return this.idsAmount+1 >= this.numQuestions;
-}
-
-
-setQuizRunning(running){
-  this.isQuizRunning = running;
-}
-
-getQuizRunning(){
-  return this.isQuizRunning;
-}
-
-  getQuestionIndex() {
-    return this.questionIndex;
-  }
-
-  getCorrectCount() {
-    return this.correctCount;
-  }
-
-  getCorrectIndex() {
-    const question = this.getCurrentQuestion();
-    let id;
-    for (let i = 0; i < question.options.length; i++) {
-      if (question.options[i].id == question.answer) {
-        id = i;
-        break;
-      }
-    }
-    return id;
-  }
-
-  getNumQuestions() {
-    return this.numQuestions;
-  }
-
-  resetQuiz() {
-    this.correctCount = 0;
-    this.questionIndex = 0; //current question number
-  }
-
-  getIdsList(continentMask) {
-    let ids = [];
-    continentIds.forEach((continentArray, i) => {
-      if (continentMask == "0000000" || continentMask[i] == "1") {
-        ids.push(...continentArray);
-      }
-    });
-    return ids;
-  }
-
   genQuestions(questionType) {
     this.questionType = questionType;
     this.genQuestionNAnswers();
@@ -119,48 +67,32 @@ getQuizRunning(){
     }
   }
 
-  getNameOfOption(val) {
-    return this.getCurrentQuestion().options[val].name;
+ //generate the list of ids based on the ids mask provided
+ getIdsList(continentMask) {
+  let ids = [];
+  continentIds.forEach((continentArray, i) => {
+    if (continentMask == "0000000" || continentMask[i] == "1") {
+      ids.push(...continentArray);
+    }
+  });
+  return ids;
+}
+
+//used to partially reset the quiz , resetting the current question index and the number of correctly answered questions
+  resetQuiz() {
+    this.correctCount = 0;
+    this.questionIndex = 0; //current question number
   }
 
-  getQuestionData(questionType) {
-    const question = this.getCurrentQuestion();
-    return {
-      correctAns: question.answer,
-      data: questionType ? question.capital : question.ISOCode
-    };
+  isPlayable() {
+    return this.idsAmount + 1 >= this.numQuestions;
   }
 
-  getCurrentQuestion() {
-    return this.questions[this.questionIndex];
+  isGameOver() {
+    return this.numQuestions == this.questionIndex;
   }
 
-  getCurrentQuestionRenderData() {
-    console.log(
-      "the question that is being rendered",
-      this.getCurrentQuestion(),
-      this.questionType
-    );
-    return {
-      question: this.getCurrentQuestion(),
-      questionType: this.questionType
-    };
-  }
-
-  getQuestionType() {
-    return this.questionType;
-  }
-
-  getQuestionData() {
-    const question = this.getCurrentQuestion();
-    return this.questionType ? question.capital : question.ISOCode;
-  }
-
-  //used to scrabble the array so that the answer doesn't show up in the same position
-  randArray(array) {
-    return array.sort(() => this.seedRandom() - 0.5);
-  }
-
+  //compare the user answer to the correct answer
   isCorrect(userAnswer) {
     const currentQuestion = this.getCurrentQuestion();
     const correctAnswer = currentQuestion.answer;
@@ -172,18 +104,101 @@ getQuizRunning(){
     return this.correctCount;
   }
 
+  //get the amount of correct answers
+  getCorrectCount() {
+    return this.correctCount;
+  }
+
+  //get the name of the options that was passed in
+  //the use case is to get the names for user selection and the correct selection, used for feedback screen
+  getNameOfOption(val) {
+    return this.getCurrentQuestion().options[val].name;
+  }
+
+//set the state of the quiz
+  setQuizRunning(running) {
+    this.isQuizRunning = running;
+  }
+
+  //get the quiz running state of the quiz
+  getQuizRunning() {
+    return this.isQuizRunning;
+  }
+
+  getQuestionIndex() {
+    return this.questionIndex;
+  }
+
+  
+//get the index of the correct answer
+//used to highligh the correct answer to show to the user if they are correct
+  getCorrectIndex() {
+    const question = this.getCurrentQuestion();
+    let id;
+    for (let i = 0; i < question.options.length; i++) {
+      if (question.options[i].id == question.answer) {
+        id = i;
+        break;
+      }
+    }
+    return id;
+  }
+
+  //get question number
+  getNumQuestions() {
+    return this.numQuestions;
+  }
+
+//get question data to be stored for feedback purposes
+  getQuestionData(questionType) {
+    const question = this.getCurrentQuestion();
+    return {
+      correctAns: question.answer,
+      data: questionType ? question.capital : question.ISOCode
+    };
+  }
+
+//used to get the current question 
+  getCurrentQuestion() {
+    return this.questions[this.questionIndex];
+  }
+
+  //get the current question and the type of question that is being run
+  getCurrentQuestionRenderData() {
+    return {
+      question: this.getCurrentQuestion(),
+      questionType: this.questionType
+    };
+  }
+
+
+  // //get current question type
+  // getQuestionType() {
+  //   return this.questionType;
+  // }
+
+  //used to get ether the flag code of the capital name based on selected question type
+  getQuestionData() {
+    const question = this.getCurrentQuestion();
+    return this.questionType ? question.capital : question.ISOCode;
+  }
+
+  //used to scrabble the array so that the answer doesn't show up in the same position
+  randArray(array) {
+    return array.sort(() => this.seedRandom() - 0.5);
+  }
+
+//used to increment the question number so that the next question may be loaded
   incrementQuestionCount() {
     this.questionIndex += 1;
   }
 
+  //used to get the seed of the question
   getSeed() {
     return this.seed;
   }
 
-  isGameOver() {
-    return this.numQuestions == this.questionIndex;
-  }
-
+  //generate random number based on the seeded randomization enabled by seedRandom package
   genRandNum(max) {
     //generate random seeded number from from set parameter of max
     return Math.floor(this.seedRandom() * max);
